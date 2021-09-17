@@ -107,6 +107,7 @@ a {
 
 .detail-image-container {
     flex: 1 1 auto;
+    flex-direction: row;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -132,7 +133,7 @@ a {
     position: absolute;
     bottom: -16px;
     left: 4px;
-
+    
     font-family: airstreamregular;
     color: white;
     text-shadow: rgba(0,0,0,0.9) 5px 10px 4px;

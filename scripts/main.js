@@ -2,6 +2,8 @@ var DETAIL_IMAGE_SELECTOR = '[data-image-role="target"]';
 var DETAIL_TITLE_SELECTOR = '[data-image-role="title"]';
 var DETAIL_FRAME_SELECTOR = '[data-image-role="frame"]';
 var THUMBNAIL_LINK_SELECTOR = '[data-image-role="trigger"]';
+var LEFT_BUTTON_SELECTOR = '[data-image-role="leftButton"]';
+var RIGHT_BUTTON_SELECTOR = '[data-image-role="rightButton"]';
 var HIDDEN_DETAIL_CLASS = 'hidden-detail';
 var TINY_EFFECT_CLASS = 'is-tiny';
 var ESC_KEY = 27;
@@ -53,6 +55,30 @@ function addThumbClickHandler(thumb) {
     });
 }
 
+function initButtons(thumb) {
+    'use strict';
+
+    var lb = document.querySelector(LEFT_BUTTON_SELECTOR);
+    var rb = document.querySelector(RIGHT_BUTTON_SELECTOR);
+    var pos = 0;
+
+    lb.addEventListener('click', function (event) {
+        event.preventDefault();
+        pos = (pos <= 1 ? 0 : pos - 1);
+        // console.log('left button clicked');
+        // console.log(pos);
+        setDetailsFromThumb(thumb[pos]);
+    });
+
+    rb.addEventListener('click', function (event) {
+        event.preventDefault();
+        pos = pos = (pos >= 3 ? 4 : pos + 1);
+        // console.log('right button clicked');
+        // console.log(pos);
+        setDetailsFromThumb(thumb[pos]);
+    });
+}
+
 // find all things in document that are thumbnails
 function getThumbnailsArray () {
     'use strict';
@@ -97,6 +123,7 @@ function initializeEvents() {
 
     var thumbnails = getThumbnailsArray();
     thumbnails.forEach(addThumbClickHandler);
+    initButtons(thumbnails);
     addKeyPressHandler();
 }
 
